@@ -1,5 +1,18 @@
 -- LeetCode Problem: Break Integer
 -- Runnable at https://replit.com/@dbizchallenge/BreakInteger-Haskell#main.hs
+-- > printTree 9
+-- 9
+-- |
+-- +- 6
+-- |  |
+-- |  +- 3
+-- |  |
+-- |  `- 3
+-- |
+-- `- 3
+-- 
+-- > breakInteger 9 
+-- => 27
 
 import Data.Tree hiding (Tree)
 
