@@ -15,10 +15,10 @@ breakInteger x = treeProduct(toTree x)
 
 toTree :: Int -> Tree Int
 toTree x 
-  | leafValues x = Leaf x
+  | isLeafValue x = Leaf x
   | otherwise = Branch x (toTree (partition x)) (toTree (partitionRest x))
 
-leafValues x = x >= 2 && x <= 3
+isLeafValue x = x >= 2 && x <= 3
 
 partition x 
  | x `mod` 3 == 0 = x - 3
@@ -31,12 +31,7 @@ treeProduct (Leaf x) = x
 treeProduct (Branch x l r) = (treeProduct l) * (treeProduct r)
 
 -- Display Tree
-toPrintable :: Int -> Tree String
-toPrintable x 
-  | leafValues x = Leaf (show x)
-  | otherwise = Branch (show x) (toPrintable (partition x)) (toPrintable (partitionRest x))
+toPrintable (Leaf x) = Node (show x) []
+toPrintable (Branch x l r) = Node (show x) [toPrintable l, toPrintable r]
 
-toDataTree (Leaf x) = Node x []
-toDataTree (Branch x l r) = Node x [toDataTree l, toDataTree r]
-
-printTree i = putStrLn $ drawTree (toDataTree (toPrintable i))
+printTree i = putStrLn $ drawTree (toPrintable (toTree i))
